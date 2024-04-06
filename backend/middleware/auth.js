@@ -15,8 +15,8 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander("Please Login to access this resource", 401));
   }
 
-  console.log("MK JAAT:- ", token , "  JAT  " , process.env.JWT_SECRET);
-  const decodedData = jwt.verify(`${token}`, `${process.env.JWT_SECRET}`);
+  console.log("MK JAAT:- ", token , "  JAT  " , process.env.JWT_SECRET)
+  const decodedData = jwt.verify(token, process.env.JWT_SECRET);
   console.log("decodedData :-", decodedData);
 
   req.user = await User.findById(decodedData.payload);
