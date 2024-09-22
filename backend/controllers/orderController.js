@@ -18,14 +18,6 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
       user
     } = req.body;
 
-    console.log("shippingInfo :-", shippingInfo);
-    console.log(" orderItems :-",  orderItems);
-    console.log("paymentInfo :-", paymentInfo);
-    console.log("itemsPrice :-", itemsPrice);
-    console.log("taxPrice :-", taxPrice);
-    console.log("shippingPrice :-", shippingPrice);
-    console.log("totalPrice :-", totalPrice);
-    console.log("user :-", user);
     const order = await Order.create({
       shippingInfo,
       orderItems,
@@ -68,7 +60,8 @@ exports.getSingleOrder = catchAsyncErrors(async (req, res, next) => {
 
 // get logged in user  Orders
 exports.myOrders = catchAsyncErrors(async (req, res, next) => {
-  const orders = await Order.find({ user: req.user._id });
+  const userId = req.query.userId;
+  const orders = await Order.find({ user:  userId });
 
   res.status(200).json({
     success: true,

@@ -15,7 +15,7 @@ router.route("/order/new").post(newOrder);
 
 router.route("/order/:id").get(isAuthenticatedUser, getSingleOrder);
 
-router.route("/orders/me").get(isAuthenticatedUser, myOrders);
+router.route("/orders/me").get(myOrders);
 
 router
   .route("/admin/orders")
